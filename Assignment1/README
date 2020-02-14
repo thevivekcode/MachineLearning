@@ -1,0 +1,17 @@
+Vivek Singh 2019MCS2574
+
+part1.py
+Command to run:- 3 arguments:
+python part1.py [location of X vector csv] [location of Y vector csv] [Learning rate]
+
+part2.py
+Command to run:- 2 arguments:
+python part2.py [location of Data csv] [Batch Size]
+
+part3.py
+Command to run:- 2 arguments:
+python part3.py [location of X Data csv] [location of Y Data csv]
+
+part4.py
+Command to run:- 2 arguments:
+python part3.py [location of X Data dat] [location of Y Data dat]
