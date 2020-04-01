@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[7]:
+# In[1]:
 
 
 from xclib.data import data_utils
@@ -12,7 +12,11 @@ import time
 import matplotlib.pyplot as plt
 import sys
 
+
 # # Reading the data-set
+
+# In[2]:
+
 
 # Read sparse file
 train_x = data_utils.read_sparse_file(sys.argv[1], force_header=True)
@@ -30,7 +34,7 @@ val_y = pd.read_csv(sys.argv[6], sep="\n", header=None).to_numpy()
 
 # # Calculating Entropy
 
-# In[9]:
+# In[3]:
 
 
 def entropy(data):
@@ -58,7 +62,7 @@ def entropy(data):
 
 # # Finding Info-gain
 
-# In[10]:
+# In[4]:
 
 
 def info_gain(data,true_data_index,false_data_index,H):
@@ -85,7 +89,7 @@ def info_gain(data,true_data_index,false_data_index,H):
     return I
 
 
-# In[11]:
+# In[5]:
 
 
 def best_split(data,H):
@@ -122,7 +126,7 @@ def best_split(data,H):
 #
 # Stores necessary info at each node of the decison tree model.
 
-# In[12]:
+# In[6]:
 
 
 class Decision_nodes:
@@ -180,7 +184,7 @@ class Decision_nodes:
 # get_all_decesion_nodes : Returns List of all nodes preset in tree *Level Wise* <br>
 # pruning : Method to prune fully grown tree with Validation data
 
-# In[13]:
+# In[23]:
 
 
 class Decision_tree:
@@ -507,12 +511,7 @@ class Decision_tree:
         test_acc_prune.append(self.predict(test_x,test_y))
         val_acc_prune.append(self.predict(val_x,val_y))
 
-        # grab a reference to the current axes
-        ax = plt.gca()
-        # set the xlimits to be the reverse of the current xlimits
-        ax.set_xlim(ax.get_xlim()[::-1])
-        # call `draw` to re-render the graph
-        plt.draw()
+
         print("train acc {} test acc {} val acc {}".format(self.predict(train_x,train_y),self.predict(test_x,test_y),self.predict(val_x,val_y)))
         tr, = plt.plot(node_count_list,train_acc_prune, label="Train Accuracy")
         te, = plt.plot(node_count_list,test_acc_prune, label ="Test Accuracy")
@@ -521,13 +520,19 @@ class Decision_tree:
         plt.ylabel("Accuracy")
         plt.title("Accuracy as we prune the nodes")
         plt.legend()
+        # grab a reference to the current axes
+        ax = plt.gca()
+        # set the xlimits to be the reverse of the current xlimits
+        ax.set_xlim(ax.get_xlim()[::-1])
+        # call `draw` to re-render the graph
+        plt.draw()
         plt.show()
         return tr,te,vl
 
 
 # # Creating indexed data for speeding the process
 
-# In[14]:
+# In[24]:
 
 
 def get_indexed_data(train_x,train_y,test_x,test_y,val_x,val_y):
@@ -549,7 +554,7 @@ Train_data, Test_data, Val_data, data = get_indexed_data(train_x,train_y,test_x 
 # Calculating the accuracy at each node as the tree keeps growing. <br>
 # Plotting the graph of Nodes vs Accuracy
 
-# In[15]:
+# In[14]:
 
 
 print("PART A:")
@@ -564,25 +569,25 @@ tree.Build_tree(root, data, Train_data, Test_data, Val_data)
 print(time.time()-s)
 
 
-# In[16]:
+# In[15]:
 
 
 print("Train {} Test {} Val {}".format(tree.predict(train_x,train_y),tree.predict(test_x,test_y),tree.predict(val_x,val_y)))
 
 
-# In[28]:
+# In[29]:
 
 
 # import pickle
 # with open("tree",'wb') as f:
 #     pickle.dump(tree,f)
 
-import pickle
-with open('tree','rb') as f:
-    tree = pickle.load(f)
+# import pickle
+# with open('tree','rb') as f:
+#     tree = pickle.load(f)
 
 
-# In[20]:
+# In[17]:
 
 
 # %matplotlib qt
@@ -598,7 +603,7 @@ def plot_node_vs_acc(tree):
     return tr,te,vl
 
 
-# In[21]:
+# In[18]:
 
 
 plot_node_vs_acc(tree)
@@ -607,17 +612,17 @@ plot_node_vs_acc(tree)
 # # Part B
 # Plotting the graph for nodes vs Accuracy in pruning the tree
 
-# In[22]:
+# In[30]:
 
 
 print("PART B:")
 print(tree.node_count())
 
 
-# In[30]:
+# In[27]:
 
 
-# tree.pruning()
+Decision_tree.pruning(tree)
 
 
 # In[23]:
@@ -701,19 +706,19 @@ def prun(tree):
 # In[25]:
 
 
-pot(tree.root)
+# pot(tree.root)
 
 
 # In[26]:
 
 
-print("total decision nodes",len(post_order))
+# print("total decision nodes",len(post_order))
 
 
 # In[27]:
 
 
-prun(tree)
+# prun(tree)
 
 
 # In[ ]:
@@ -816,7 +821,7 @@ n_estimators = np.arange(50,1000,100)
 a=np.linspace(0.01,0.1,10)
 b=np.linspace(0.2,0.9,10)
 max_features = np.append(a,b)
-min_samples_split =  np.arange(2,50,2)
+min_samples_split =  np.arange(2,100,2)
 
 
 # In[2]:

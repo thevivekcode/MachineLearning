@@ -1,0 +1,8 @@
+how to run A3P1.py
+[x]: location of file x:
+
+    python3 A3P1.py [train_x] [train_y] [test_x] [test_y] [val_x] [val_y]
+
+Each part that is under execution is printed.
+PART C and D takes a huge amount of time.
+These part very originally executed on Google colab to plotting and reporting purpose.
