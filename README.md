@@ -12,4 +12,7 @@ IIT Delhi COL774
   - SVM(Support Vector Machine) FashionMNIST classification.
   
  ## Assignment 3
-   - Decison Trees and Random Forest for Virus infected executables classification
+   - Decison Trees and Random Forest for Virus infected executables classification.
+   
+ ## Assignment 4
+   - Encoder-Decoder CNN-LSTM for image captioning.
